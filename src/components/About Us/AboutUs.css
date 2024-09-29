@@ -1,0 +1,12 @@
+.about-us_container{
+    margin: 5% 10%;
+}
+.about_us_content{
+    padding: 2rem 1rem;
+    width: 100%;
+}
+.about_dot{
+    display: flex;
+    justify-content: end;
+}
+
