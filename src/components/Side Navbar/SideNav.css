@@ -1,0 +1,26 @@
+.rs-sidenav-default {
+    background: linear-gradient(180deg, #480365 23%, #9106CB 56%);
+    color: white;
+}
+
+.rs-sidenav-default .rs-dropdown-toggle, 
+.rs-sidenav-default .rs-sidenav-item, 
+.rs-sidenav-default .rs-sidenav-toggle-button {
+    background: transparent; 
+}
+
+.rs-sidenav-default .rs-sidenav-item {
+    transition: background-color 0.3s ease; 
+}
+
+.rs-sidenav-default .rs-sidenav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.no-hover:hover {
+    background-color: transparent !important;  
+}
+.rs-sidenav-default.rs-sidenav-collapse-in .rs-sidenav-item.rs-sidenav-item-active{
+    color: green;
+    font-weight: bold;
+}
