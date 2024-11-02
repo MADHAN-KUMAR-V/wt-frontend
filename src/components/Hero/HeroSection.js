@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'rsuite/Container';
 import './HeroSection.css'
 import logo from '../../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -12,7 +13,7 @@ const HeroSection = () => {
                 <p style={{fontSize:"50px"}}>Catch the Big Investors,</p>
                 <p>Ride the Wave to <span style={{color:"#89FC00"}}>Success!</span></p>
                 <div className='hero_btn'>
-                <p >Explore more !..</p>
+                <p><Link to={'/dashboard'}>Explore more !..</Link></p>
                 </div>
             </Container>
         </Container>
