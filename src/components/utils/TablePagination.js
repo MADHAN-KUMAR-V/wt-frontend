@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import { Table, Pagination } from 'rsuite';
+import React, { useState } from "react";
+import { Table, Pagination } from "rsuite";
 
 const { Column, HeaderCell, Cell } = Table;
 
-const TablePagination = ({ data, pagination, count, hf, headerText, footerLink ,pglimit}) => {
+const TablePagination = ({
+  data,
+  pagination,
+  count,
+  hf,
+  headerText,
+  footerLink,
+  limit,
+}) => {
   const [activePage, setActivePage] = useState(1);
-  const [limit, setLimit] = useState(pglimit);
 
   const getPageData = () => {
     const start = (activePage - 1) * limit;
@@ -17,7 +24,7 @@ const TablePagination = ({ data, pagination, count, hf, headerText, footerLink ,
     const keys = Object.keys(data[0]);
 
     return keys.map((key) => (
-      <Column key={key}  flexGrow resizable>
+      <Column key={key} flexGrow resizable>
         <HeaderCell>{key.charAt(0).toUpperCase() + key.slice(1)}</HeaderCell>
         <Cell dataKey={key} />
       </Column>
@@ -25,9 +32,19 @@ const TablePagination = ({ data, pagination, count, hf, headerText, footerLink ,
   };
 
   return (
-    <div style={{ backgroundColor: 'white', borderRadius: '4px', padding: '1rem' }}>
+    <div
+      style={{ backgroundColor: "white", borderRadius: "4px", padding: "1rem" }}
+    >
       {hf && (
-        <div style={{ marginBottom: '1rem', textAlign: 'center', fontWeight: 'bold', borderBottom: '1px solid gray', paddingBottom: '0.5rem' }}>
+        <div
+          style={{
+            marginBottom: "1rem",
+            textAlign: "center",
+            fontWeight: "bold",
+            borderBottom: "1px solid gray",
+            paddingBottom: "0.5rem",
+          }}
+        >
           {headerText}
         </div>
       )}
@@ -41,8 +58,7 @@ const TablePagination = ({ data, pagination, count, hf, headerText, footerLink ,
           limit={limit}
           activePage={activePage}
           onChangePage={setActivePage}
-          onChangeLimit={setLimit}
-          layout={['total', '-', 'limit', '|', 'pager']}
+          layout={["total", "-", "|", "pager"]}
           prev
           next
           first
@@ -52,8 +68,11 @@ const TablePagination = ({ data, pagination, count, hf, headerText, footerLink ,
         />
       )}
       {hf && (
-        <div style={{ marginTop: '1rem', textAlign: 'end' }}>
-          <a href={footerLink} style={{ color: 'blue', textDecoration: 'underline' }}>
+        <div style={{ marginTop: "1rem", textAlign: "end" }}>
+          <a
+            href={footerLink}
+            style={{ color: "blue", textDecoration: "underline" }}
+          >
             View More
           </a>
         </div>

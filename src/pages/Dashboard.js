@@ -115,7 +115,7 @@ const Dashboard = () => {
             <TablePagination
               data={mockData}
               pagination={false}
-              pglimit={5}
+              limit={5}
               count={mockData.length}
               hf={true}
               headerText="Top Buy"
@@ -128,7 +128,7 @@ const Dashboard = () => {
               pagination={false}
               count={mockData.length}
               hf={true}
-              pglimit={5}
+              limit={5}
               headerText="Top Sell"
               footerLink="/more-data-2"
             />
