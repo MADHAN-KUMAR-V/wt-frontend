@@ -1,7 +1,6 @@
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Loader from "./components/utils/Loading";
 
 // Lazy loading components
 const Home = lazy(() => import("./pages/Home"));
@@ -15,25 +14,9 @@ const BulkDeals = lazy(() => import("./pages/BulkDeals"));
 const History = lazy(() => import("./pages/History"));
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-   
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000); 
-
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loader />; 
-  }
-
   return (
     <Router>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<SideNavLayout />}>
