@@ -205,7 +205,6 @@ const Signal = () => {
             hf={true}
             limit={10}
             headerText="Watchlist"
-            footerLink=""
           />
         </FlexboxGrid.Item>
       </FlexboxGrid>

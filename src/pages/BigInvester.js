@@ -1,93 +1,41 @@
-import React from "react";
-import { Breadcrumb, SelectPicker} from "rsuite";
+import React, { useState, useEffect } from "react";
+import { Breadcrumb, SelectPicker } from "rsuite";
 import TablePagination from "../components/utils/TablePagination";
+import axios from "axios";
 
+const data = ["FII", "DII", "Individual"].map((item) => ({
+  label: item,
+  value: item,
+}));
 
-const mockData = [
-  {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    age: 28,
-  },
-  {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    age: 34,
-  },
-  {
-    id: 3,
-    firstName: "Michael",
-    lastName: "Johnson",
-    age: 45,
-  },
-  {
-    id: 4,
-    firstName: "Emily",
-    lastName: "Davis",
-    age: 23,
-  },
-  {
-    id: 5,
-    firstName: "Williammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-    lastName: "Brown",
-    age: 37,
-  },
-  {
-    id: 6,
-    firstName: "Linda",
-    lastName: "Taylor",
-    age: 31,
-    city: "Philadelphia",
-    email: "linda.taylor@example.com",
-  },
-  {
-    id: 7,
-    firstName: "David",
-    lastName: "Anderson",
-    age: 29,
-    city: "San Antonio",
-    email: "david.anderson@example.com",
-  },
-  {
-    id: 8,
-    firstName: "Sarah",
-    lastName: "Thomas",
-    age: 41,
-    city: "San Diego",
-    email: "sarah.thomas@example.com",
-  },
-  {
-    id: 9,
-    firstName: "Robert",
-    lastName: "Jackson",
-    age: 52,
-    city: "Dallas",
-    email: "robert.jackson@example.com",
-  },
-  {
-    id: 10,
-    firstName: "Patricia",
-    lastName: "White",
-    age: 27,
-    city: "San Jose",
-    email: "patricia.white@example.com",
-  },
-  {
-    id: 11,
-    firstName: "Patricia",
-    lastName: "White",
-    age: 27,
-    city: "San Jose",
-    email: "patricia.white@example.com",
-  },
-];
-
-const data = ['FII','DII','Indivdual'].map(
-  item => ({ label: item, value: item })
-);
 const BigInvester = () => {
+  const [selectedInvestor, setSelectedInvestor] = useState("FII");
+  const [fetchedData, setFetchedData] = useState([]); // Initialize as an empty array
+
+  // Fetch data whenever selectedInvestor changes
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${process.env.REACT_APP_BACKEND_BASE_URL}/listCliends?type=${selectedInvestor}`;
+        console.log("Fetching from URL:", url);
+
+        const response = await axios.get(url);
+        console.log("Response Data:", response.data.users);
+        setFetchedData(response.data.users); 
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setFetchedData([]); 
+      }
+    };
+
+    fetchData();
+  }, [selectedInvestor]); 
+
+  console.log(fetchedData);
+
+  const handleSelectChange = (value) => {
+    setSelectedInvestor(value);
+  };
 
   return (
     <div>
@@ -112,18 +60,18 @@ const BigInvester = () => {
             searchable={false}
             style={{ width: 224 }}
             placeholder="Select without search"
-            defaultValue="FII"
+            value={selectedInvestor}
+            onChange={handleSelectChange}
           />
         </div>
       </div>
       <TablePagination
-        data={mockData}
+        data={fetchedData} // Use fetched data here
         pagination={true}
         limit={10}
-        count={mockData.length}
+        count={fetchedData.length}
         hf={false}
         headerText="Top Buy"
-        footerLink="/more-data"
       />
     </div>
   );

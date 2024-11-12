@@ -119,7 +119,6 @@ const Dashboard = () => {
               count={mockData.length}
               hf={true}
               headerText="Top Buy"
-              footerLink="/more-data"
             />
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={11}>

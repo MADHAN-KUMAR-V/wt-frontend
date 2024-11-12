@@ -9,7 +9,6 @@ const TablePagination = ({
   count,
   hf,
   headerText,
-  footerLink,
   limit,
 }) => {
   const [activePage, setActivePage] = useState(1);
@@ -23,12 +22,27 @@ const TablePagination = ({
     if (data.length === 0) return null;
     const keys = Object.keys(data[0]);
 
-    return keys.map((key) => (
-      <Column key={key} flexGrow resizable>
-        <HeaderCell>{key.charAt(0).toUpperCase() + key.slice(1)}</HeaderCell>
-        <Cell dataKey={key} />
-      </Column>
-    ));
+    return (
+      <>
+        {/* Serial Number Column */}
+        <Column width={50} fixed>
+          <HeaderCell>S. No</HeaderCell>
+          <Cell>
+            {(rowData, rowIndex) => (activePage - 1) * limit + rowIndex + 1}
+          </Cell>
+        </Column>
+
+        {/* Other Columns */}
+        {keys.map((key) => (
+          <Column key={key} flexGrow={1} resizable={true}>
+            <HeaderCell>
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </HeaderCell>
+            <Cell dataKey={key} />
+          </Column>
+        ))}
+      </>
+    );
   };
 
   return (
@@ -66,16 +80,6 @@ const TablePagination = ({
           ellipsis
           boundaryLinks
         />
-      )}
-      {hf && (
-        <div style={{ marginTop: "1rem", textAlign: "end" }}>
-          <a
-            href={footerLink}
-            style={{ color: "blue", textDecoration: "underline" }}
-          >
-            View More
-          </a>
-        </div>
       )}
     </div>
   );
