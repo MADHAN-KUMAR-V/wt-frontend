@@ -1,21 +1,12 @@
-import React, { useState } from "react";
-import { DateRangePicker } from "rsuite"; 
-import './DateRange.css'; 
+import React from "react";
+import { DateRangePicker } from "rsuite";
+import "./DateRange.css";
 
-const DateRange = ({ handleChange }) => {
-  const [value, setValue] = useState(getLastMonthRange());
-
-  function getLastMonthRange() {
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setMonth(endDate.getMonth() - 1);
-    return [startDate, endDate];
-  }
-
+const DateRange = ({ handleChange, setValue, value, getLastMonthRange }) => {
   const handleDateChange = (dates) => {
     if (!dates) {
       const lastMonthRange = getLastMonthRange();
-      setValue(lastMonthRange); 
+      setValue(lastMonthRange);
       handleChange(lastMonthRange);
     } else {
       setValue(dates);
@@ -24,10 +15,10 @@ const DateRange = ({ handleChange }) => {
   };
 
   return (
-    <DateRangePicker 
-      onChange={handleDateChange} 
-      value={value} 
-      placement="bottomEnd" 
+    <DateRangePicker
+      onChange={handleDateChange}
+      value={value}
+      placement="bottomEnd"
     />
   );
 };
