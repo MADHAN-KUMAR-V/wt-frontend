@@ -36,19 +36,19 @@ const Signal = () => {
 
           const response = await axios.get(url);
           console.log(response, "response");
-          console.log("Response Data:", response.data);
-          setFetchedData(response.data.watchlist || []);
+          console.log("Response Data:", response.data.data);
+          setFetchedData(response.data.data.watchlist || []);
           setTopBuy(
-            response.data.top_buy.length > 0
-              ? response.data.top_buy[0].stock_name
+            response.data.data.top_buy.length > 0
+              ? response.data.data.top_buy[0].stock_name
               : "No Stock Available!"
           );
           setTopSell(
-            response.data.top_sell.length > 0
-              ? response.data.top_sell[0].stock_name
+            response.data.data.top_sell.length > 0
+              ? response.data.data.top_sell[0].stock_name
               : "No Stock Available!"
           );
-          setSentiment(response.data.buyCount);
+          setSentiment(response.data.data.buyCount);
         } catch (error) {
           console.error("Error fetching data:", error);
           setFetchedData([]);
@@ -174,13 +174,13 @@ const Signal = () => {
               >
                 <ReactSpeedometer
                   maxValue={100}
-                  value={sentiment===0?50:sentiment*10}
+                  value={sentiment === 0 ? 50 : sentiment * 10}
                   segments={3}
                   needleColor="black"
                   startColor="green"
                   endColor="red"
                   customSegmentStops={[0, 33, 66, 100]}
-                  segmentColors={["red", "yellow","green" ]}
+                  segmentColors={["red", "yellow", "green"]}
                   needleTransition="easeQuadInOut"
                   needleTransitionDuration={500}
                   textColor="#333"

@@ -53,7 +53,7 @@ const BigInvester = () => {
         <Breadcrumb style={{ fontSize: "1rem", margin: "0" }}>
           <Breadcrumb.Item href="/dashboard">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/dashboard/bulk-deals" active>
-            bulk-deals
+            Big Invester
           </Breadcrumb.Item>
         </Breadcrumb>
         <div style={{ display: "flex", alignItems: "center" }}>
